@@ -10,10 +10,18 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@NoArgsConstructor
+
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    public Role() {
+    }
+
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
