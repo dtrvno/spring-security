@@ -34,20 +34,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User saveUser(User user) {
-        log.info("Saving new user {0} into database",user.getName());
+        log.info("Saving new user {} into database",user.getName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
     }
 
     @Override
     public Role saveRole(Role role) {
-        log.info("Saving new role {0} into database",role.getName());
+        log.info("Saving new role {} into database",role.getName());
         return roleRepo.save(role);
     }
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        log.info("adding role {0} to user {1}",roleName,username);
+        log.info("adding role {} to user {}",roleName,username);
         User user=userRepo.findByUsername(username);
         Role role=roleRepo.findByName(roleName);
         user.getRoles().add(role);
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User getUser(String username) {
-        log.info("Fetching  user {1}",username);
+        log.info("Fetching  user {}",username);
         return userRepo.findByUsername(username);
     }
 
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new UsernameNotFoundException("User not found in database");
         }
         else {
-            log.error("User found in database: {0}",username);
+            log.error("User found in database: {}",username);
         }
         Collection <SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role->{
